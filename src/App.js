@@ -1,32 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import './App.css';
-import { decrease, increase, set } from "./reducers";
+import UserForm from "./components/UserForm";
+// import { decrease, increase, set } from "./reducers";
 
 
 class App extends Component {
-  handleSet = e => {
-    const { set } = this.props;
-    const {value }= this.state;
-    set(Number(value));
+  handleSubmit = payload => {
+    console.log(payload);
   };
-
   
-  handleChange = e => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value});
-  };
-
   render() {
-    const { decrease, increase, value } = this.props;
-    
     return (
       <div className="App">
-        <p>{value}</p>
-        <button onClick={increase}>Increase</button>
-        <button onClick={decrease}>Decrease</button>
-        <input name='value' onChange={this.handleChange} />
-        <button onClick={this.handleSet}>Set</button>
+        <UserForm onSubmit={this.handleSubmit} />
       </div>
     );
   }
@@ -36,9 +23,9 @@ const mapSateToProps = state => ({ value: state.counter });
 
 
 const mapDispatchToProp = dispatch => ({
-  increase: () => dispatch(increase()),
-  decrease: () => dispatch(decrease()),
-  set: payload => dispatch(set(payload)),
+  // increase: () => dispatch(increase()),
+  // decrease: () => dispatch(decrease()),
+  // set: payload => dispatch(set(payload)),
 });
 
 export default connect(mapSateToProps, mapDispatchToProp)(App);
