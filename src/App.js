@@ -18,8 +18,7 @@ class App extends Component {
   };
 
   render() {
-    const { decrease, increase, set, value } = this.props;
-    console.log(this.state);
+    const { decrease, increase, value } = this.props;
     
     return (
       <div className="App">
@@ -33,9 +32,8 @@ class App extends Component {
   }
 }
 
-const mapSateToProps = state => {
-  return { value: state };
-};
+const mapSateToProps = state => ({ value: state.counter });
+
 
 const mapDispatchToProp = dispatch => ({
   increase: () => dispatch(increase()),
