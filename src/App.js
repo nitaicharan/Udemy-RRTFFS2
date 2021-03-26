@@ -1,39 +1,46 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import './App.css';
-import logo from './logo.svg';
+import { decrease, increase, set } from "./reducers";
 
 
 class App extends Component {
-  render() {
-    console.log(this.props);
+  handleSet = e => {
+    const { set } = this.props;
+    const {value }= this.state;
+    set(Number(value));
+  };
 
+  
+  handleChange = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value});
+  };
+
+  render() {
+    const { decrease, increase, set, value } = this.props;
+    console.log(this.state);
+    
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <p>{value}</p>
+        <button onClick={increase}>Increase</button>
+        <button onClick={decrease}>Decrease</button>
+        <input name='value' onChange={this.handleChange} />
+        <button onClick={this.handleSet}>Set</button>
       </div>
     );
   }
 }
 
 const mapSateToProps = state => {
-  console.log({ state });
-  return { valor: state };
+  return { value: state };
 };
 
-const mapDispatchToProp = dispatch => ({});
+const mapDispatchToProp = dispatch => ({
+  increase: () => dispatch(increase()),
+  decrease: () => dispatch(decrease()),
+  set: payload => dispatch(set(payload)),
+});
 
 export default connect(mapSateToProps, mapDispatchToProp)(App);
