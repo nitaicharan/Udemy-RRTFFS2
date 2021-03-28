@@ -1,10 +1,12 @@
-const initialState = 0;
+const INCREASE = 'COUNTER/INCREASE';
+const DECREASE = 'COUNTER/DECREASE';
 
+const initialState = 0;
 export default function(state = initialState, action) {
     switch (action.type) {
-        case 'INCREASE':
+        case INCREASE:
             return state + 1;
-        case 'DECREASE':
+        case DECREASE:
             return state - 1;
         default:
             return state ;
